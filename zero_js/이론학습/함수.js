@@ -46,7 +46,7 @@ console.log(argsFunc("args1", "args2", "args3"));
 const multiply = (x, y, z) => {
   return x * y * z;
 };
-// return 생략가능
+// return 생략가능(1줄코드로 해결이 가능할 때)
 const multiply2 = (x, y, z) => x * y * z;
 console.log(multiply(1, 2, 3));
 // 6
