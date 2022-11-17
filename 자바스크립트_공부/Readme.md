@@ -4,7 +4,7 @@
 
 ## 1. 학습 목표
 
-- 이 강좌를 학습하는 이유는 지금까지 React나 Next.js 등 Javascript 프레임워크나 라이브러리에 대해서는 깊게 학습을 했습니다. 하지만 순수 Javascript나 HTML그리고 CSS에 대해서는 기초 교육 이후로 크게 신경쓰지 않고 있었던 것 같아서 Javascript에 대한 이해도를 높이고 추후에 다른 라이브러리나 프레임워크를 다룰 때 도움이 될 수 있도록 기본기를 탄탄하게 다지자는 목표로 학습을 시작했습니다.
+- Javascript를 학습하는 이유는 지금까지 React나 Next.js 등 Javascript 프레임워크나 라이브러리에 대해서는 깊게 학습을 했습니다. 하지만 순수 Javascript나 HTML그리고 CSS에 대해서는 기초 교육 이후로 크게 신경쓰지 않고 있었던 것 같아서 Javascript에 대한 이해도를 높이고 추후에 다른 라이브러리나 프레임워크를 다룰 때 도움이 될 수 있도록 기본기를 탄탄하게 다지자는 목표로 학습을 시작했습니다.
 
 - Javascript의 기본 문법, 배열, 객체, 함수에 대한 이해와 이를 활용한 실습
 
@@ -38,6 +38,7 @@
   - 로또 구현(lotto.html)
   - 배열 메서드 심화(map, filter, fill, forEach)(배열메서드.js)
   - 가위바위보 구현(rock-scissors-paper.html)
+  - 반응 속도 체크 게임 구현(response-check.html)
 
 - ## 실습
   - 쿵쿵따게임(끝말잇기 + 3글자 제한 + 인원입력 안하면 다음 코드 실행하지 않게) 구현(쿵쿵따게임.html)
@@ -47,6 +48,9 @@
   - 아웃 기능이 있는 숫자 야구 구현(number-baseball-self.html)
     - 삼항연산자를 활용한 조건분기, 배열 메서드 활용, 세부 조건분기 설정, return을 활용한 else 제거
   - 색칠된 로또 구현(lotto-self.html)
-    - 비동기의 이해(setTimeout), 반복문과 배열 메서드 심화 활용
+    - 비동기의 이해(setTimeout), 반복문과 배열 메서드 심화 활용, 클로저 문제의 이해
   - 5판 3선승제 가위바위보(rock-scissors-paper-self.html)
     - 비동기의 이해(setInterval, clearInterval), 수치화한 규칙으로 조건문 분기하는 방법, 이벤트가 발생하지 않게끔 동작하게 하는 방법 이해
+  - 반응 속도 체크 게임 구현(response-check-self.html)
+    - CSS id와 class별 값 부여 방법, querySelector 내부 속성 값 중 classList와 관련 메서드(contains, remove, add, replace)의 이해,
+      setTimeout과 clearTimeout을 활용한 비동기 이해
