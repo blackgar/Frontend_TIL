@@ -34,16 +34,19 @@
   - 끝말잇기 구현(word-relay.html)
   - 두 숫자 계산기 구현(calculator.html)
   - querySelector & addEventListner 이해(querySelector & addEventListner.html)
-  - 배열 메서드 심화(map, filter, fill, forEach)
+  - 숫자 야구 구현(number-baseball.html)
+  - 로또 구현(lotto.html)
+  - 배열 메서드 심화(map, filter, fill, forEach)(배열메서드.js)
+  - 가위바위보 구현(rock-scissors-paper.html)
 
 - ## 실습
   - 쿵쿵따게임(끝말잇기 + 3글자 제한 + 인원입력 안하면 다음 코드 실행하지 않게) 구현(쿵쿵따게임.html)
     - querySelector, addEventListener, 조건문 응용
   - 연속된 숫자 계산 가능한 계산기 구현(calculator-self.html)
     - 형변환과 조건문 응용(switch), 연산자별 문자열 계산 방법, 각 event별 작동 이해
-  - 숫자 야구 구현(number-baseball-self.html)
+  - 아웃 기능이 있는 숫자 야구 구현(number-baseball-self.html)
     - 삼항연산자를 활용한 조건분기, 배열 메서드 활용, 세부 조건분기 설정, return을 활용한 else 제거
-  - 로또 구현(lotto-self.html)
+  - 색칠된 로또 구현(lotto-self.html)
     - 비동기의 이해(setTimeout), 반복문과 배열 메서드 심화 활용
-  - 가위바위보(rock-scissors-paper-self.html)
-    - 비동기의 이해(setInterval, clearInterval),
+  - 5판 3선승제 가위바위보(rock-scissors-paper-self.html)
+    - 비동기의 이해(setInterval, clearInterval), 수치화한 규칙으로 조건문 분기하는 방법, 이벤트가 발생하지 않게끔 동작하게 하는 방법 이해
