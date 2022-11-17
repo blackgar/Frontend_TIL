@@ -31,6 +31,16 @@
           return true;
         };
 
+        const AlertAndAppendLog = (alertMessage, logMessage, lifeMessage) => {
+          alert(alertMessage);
+          logMessage
+            ? $log.append(logMessage, document.createElement("br"))
+            : null;
+          lifeMessage
+            ? ($life.textContent = lifeMessage)
+            : `${life}회 남았습니다.`;
+        };
+
         const onSubmit = (event) => {
           event.preventDefault();
           let inputNumber = Array(...$input.value);
@@ -57,13 +67,11 @@
           );
           // 나온 결과로 strikes가 4라면 모든 숫자를 위치도 동일하게 맞춘 것이므로 승리.
           if (strikes === 4) {
-            alert("홈런입니다~!!! 승리~~!!!!");
-            //
-            $log.append(
-              `${$input.value}: 홈런!!!!!!!!`,
-              document.createElement("br")
+            AlertAndAppendLog(
+              "홈런입니다~!!! 승리~~!!!!",
+              `${inputNumber.join("")}: 홈런!!!!!!!`,
+              "승리했습니다!!!"
             );
-            $life.textContent = `승리했습니다!!!`;
             return;
           }
           // 승리하지 못했다면, 기회 하나 차감
@@ -73,7 +81,11 @@
             alert(
               `기회가 모두 소진되었습니다. 패배ㅠㅠ. 정답은 ${number}입니다.`
             );
-            $life.textContent = `패배! 정답은 ${number}입니다.`;
+            AlertAndAppendLog(
+              `기회가 모두 소진되었습니다. 패배ㅠㅠ. 정답은 ${number}입니다.`,
+              0,
+              `패배! 정답은 ${number}입니다.`
+            );
             // window.location.reload();
             return;
           }
@@ -82,34 +94,31 @@
           // 추가 조건으로 아무 숫자도 못맞췄다면 아웃이므로 out + 1.
           if (balls === 0) {
             out += 1;
-            alert(`${out}아웃입니다.`);
-            $log.append(
-              `${inputNumber.join("")}: ${out}아웃`,
-              document.createElement("br")
+            AlertAndAppendLog(
+              `${out}아웃입니다.`,
+              `${inputNumber.join("")}: ${out}아웃`
             );
+
             // 3아웃이라면 패배.
             if (out > 2) {
-              alert(`3아웃으로 패배하셨습니다. 정답은 ${number}입니다.`);
-              // window.location.reload();
-              const message = document.createTextNode(
+              AlertAndAppendLog(
+                `3아웃으로 패배하셨습니다. 정답은 ${number}입니다.`,
+                0,
                 `패배! 정답은 ${number}입니다.`
               );
-              $log.appendChild(message);
-              $life.textContent = "";
+              // window.location.reload();
               return;
             }
           } else {
             // 현재 맞춘 strikes와 balls를 알려준다.
-            alert(`${strikes}스트라이크 ${balls}볼 입니다.`);
-            $log.append(
-              `${inputNumber.join("")}: ${strikes} 스트라이크 ${balls} 볼`,
-              document.createElement("br")
+            AlertAndAppendLog(
+              `${strikes}스트라이크 ${balls}볼 입니다.`,
+              `${inputNumber.join("")}: ${strikes} 스트라이크 ${balls} 볼`
             );
           }
 
           // 남은 기회를 알려준다.
           alert(`기회는 총 ${life}회 남았습니다.`);
-          $life.textContent = `${life}회 남았습니다.`;
         };
         $form.addEventListener("submit", onSubmit);
         $life.textContent = `${life}회 남았습니다.`;
