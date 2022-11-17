@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>가위바위보</title>
+    <style>
+      #rsp {
+        width: 142px;
+        height: 200px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="rsp"></div>
+    <div>
+      <button id="scissors" class="btn">가위</button>
+      <button id="rock" class="btn">바위</button>
+      <button id="paper" class="btn">보</button>
+    </div>
+    <div id="message"></div>
+    <div id="user"></div>
+    <div id="computer"></div>
+
+    <script>
+      const $rsp = document.querySelector("#rsp");
+      const $rock = document.querySelector("#rock");
+      const $scissors = document.querySelector("#scissors");
+      const $paper = document.querySelector("#paper");
+      const $message = document.querySelector("#message");
+      const $user = document.querySelector("#user");
+      const $computer = document.querySelector("#computer");
+      // 이미지 크기에 따라 보여주기 위한 pixel값
+      const IMG_PIXEL = ["0", "-220px", "-440px"];
+      const IMG_URL = "./rsp.png";
+      // computerChoice에 담을 값 배열
+      const rsp = ["scissors", "rock", "paper"];
+      let computerChoice = "";
+      let index = 0;
+      const changeRSP = () => {
+        // index가 커져도 각 인덱스에 맞게 값을 넣기 위해 % 연산자 사용
+        computerChoice = rsp[index % 3];
+        $rsp.style.background = `url(${IMG_URL}) ${IMG_PIXEL[index % 3]} 0`;
+        $rsp.style.backgroundSize = "auto 200px";
+        index++;
+      };
+      let startRSP = setInterval(changeRSP, 50);
+
+      // let score = 0;
+      // 유저 점수와 컴퓨터 점수를 담아둘 변수
+      let userScore = 0;
+      let computerScore = 0;
+      // 점수 계산해주기. 인자로 받은 유저의 가위바위보와 컴퓨터가 선택한 가위바위보를 비교해서
+      // 플레이어가 이기는 상황, 비기는 상황, 컴퓨터가 이기는 상황으로 조건 분기하여 각 상황에 맞게
+      // score 반영 및 메시지 표시
+      const countScore = (userChoice) => {
+        if (userChoice === computerChoice) {
+          $message.textContent = "비겼습니다.";
+        } else if (
+          (userChoice === "scissors" && computerChoice === "paper") ||
+          (userChoice === "rock" && computerChoice === "scissors") ||
+          (userChoice === "paper" && computerChoice === "rock")
+        ) {
+          userScore += 1;
+          $message.textContent = "플레이어가 이겼습니다! 플레이어 +1점";
+        } else {
+          computerScore += 1;
+          $message.textContent = "컴퓨터가 이겼습니다. 컴퓨터 +1점";
+        }
+      };
+
+      // isClickable 변수로 버튼이 클릭 되었을 때는 다시 추가로 클릭하지 못하도록 구현
+      let isClickable = true;
+
+      const clickButton = (event) => {
+        if (isClickable) {
+          // 버튼을 눌렀을 때 interval을 종료시켜서 화면이 더이상 변하지 않도록 하고
+          clearInterval(startRSP);
+          // 클릭을 못하게 막아준 다음, 점수를 계산하고 이에 맞게 메시지를 표시한 다음
+          isClickable = false;
+          const userChoice = event.target.id;
+          countScore(userChoice);
+          $user.textContent = `플레이어 점수 : ${userScore}점`;
+          $computer.textContent = `컴퓨터 점수 : ${computerScore}점`;
+          index = 0;
+          // 유저가 게임에서 승리했는지, 컴퓨터가 승리했는지 판단 후 표시
+          if (userScore >= 3) {
+            alert("플레이어의 승리입니다!!");
+            $message.textContent = "플레이어의 승리입니다!";
+            return;
+          } else if (computerScore >= 3) {
+            alert("컴퓨터의 승리입니다!");
+            $message.textContent = "컴퓨터의 승리입니다!";
+            return;
+          }
+          // 이 과정이 다 마무리 됐다면(1초 뒤), 다시 컴퓨터의 가위바위보가 랜덤으로 선택될 수 있도록 동작시켜주고
+          setTimeout(() => {
+            startRSP = setInterval(changeRSP, 50);
+            // 다시 클릭할 수 있게 isClickable 변수를 true로 바꿔주고
+            isClickable = true;
+            // 매치에 대한 메시지 제거
+            $message.textContent = "";
+          }, 1000);
+        }
+      };
+      // 각 버튼 클릭에 따른 addEventListener
+      $rock.addEventListener("click", clickButton);
+      $scissors.addEventListener("click", clickButton);
+      $paper.addEventListener("click", clickButton);
+    </script>
+  </body>
+</html>

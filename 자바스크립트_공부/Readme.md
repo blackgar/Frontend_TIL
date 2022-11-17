@@ -33,9 +33,17 @@
   - 함수 기본 + 매개변수와 인수의 이해 + 객체 리터럴 + 객체의 비교(원시값과의 차이 이해)
   - 끝말잇기 구현(word-relay.html)
   - 두 숫자 계산기 구현(calculator.html)
+  - querySelector & addEventListner 이해(querySelector & addEventListner.html)
+  - 배열 메서드 심화(map, filter, fill, forEach)
 
 - ## 실습
   - 쿵쿵따게임(끝말잇기 + 3글자 제한 + 인원입력 안하면 다음 코드 실행하지 않게) 구현(쿵쿵따게임.html)
+    - querySelector, addEventListener, 조건문 응용
   - 연속된 숫자 계산 가능한 계산기 구현(calculator-self.html)
+    - 형변환과 조건문 응용(switch), 연산자별 문자열 계산 방법, 각 event별 작동 이해
   - 숫자 야구 구현(number-baseball-self.html)
+    - 삼항연산자를 활용한 조건분기, 배열 메서드 활용, 세부 조건분기 설정, return을 활용한 else 제거
   - 로또 구현(lotto-self.html)
+    - 비동기의 이해(setTimeout), 반복문과 배열 메서드 심화 활용
+  - 가위바위보(rock-scissors-paper-self.html)
+    - 비동기의 이해(setInterval, clearInterval),
