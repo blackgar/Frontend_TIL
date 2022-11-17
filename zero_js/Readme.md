@@ -31,5 +31,9 @@
   - 앞의 내용들을 활용한 별찍기 과제(이론학습/별찍기.js 참고)
   - 배열 기본 + 배열 메서드(push, pop, shift, unshift, includes, indexOf, lastIndexOf, splice, 인덱스 접근) 응용
   - 함수 기본 + 매개변수와 인수의 이해 + 객체 리터럴 + 객체의 비교(원시값과의 차이 이해)
+  - 끝말잇기 구현(word-relay.html)
+  - 두 숫자 계산기 구현(calculator.html)
 
 - ## 실습
+  - 쿵쿵따게임(끝말잇기 + 3글자 제한 + 인원입력 안하면 다음 코드 실행하지 않게) 구현(쿵쿵따게임.html)
+  - 연속된 숫자 계산 가능한 계산기 구현(calculator-self.html)
