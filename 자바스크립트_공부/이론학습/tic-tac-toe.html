@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>틱택토</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+
+      td {
+        border: 1px solid black;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      3*3 배열을 준비한다. 안에 값은 0으로 넣기
+
+      1. 게임 진행
+      플레이어 1부터 시작해서 플레이어 2 이렇게 순서대로 진행
+      플레이어 1은 배열에 O로 채우고 플레이어 2는 X로 채우기
+      채울때 조건은 안의 값이 0이어야 한다.
+      
+      그리고 특정 버튼을 눌렀을 때 해당 좌표 값을 가지고 와야하고 그 좌표 값을 인덱스에 넣어서 안의 값이 0인지 체크해야 한다.
+      안이 비어있지 않으면 이미 선택된 칸이라는 알림을 보내거나 아무 동작도 일어나지 않게끔 처리 해야한다.
+
+      체크한 칸이 5칸을 넘어가는 순간부터 칸을 체크할 때마다 승리했는지 여부를 체크한다.
+      세로 가로 대각선 배열을 탐색하면서 틱택토가 완성되었는지 체크한다.
+      승리인지 무승부인지 체크한 후 승부가 나지 않았으면 다음 턴으로 넘어간다.
+    -->
+    <!-- <table>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table> -->
+    <script>
+      // const arr = [1, 2, 3, 4, 5];
+      // const one = arr[0];
+      // const two = arr[1];
+      // const three = arr[2];
+      // const four = arr[3];
+      // const five = arr[4];
+      // 위의 코드와 아래 코드는 같은 동작을 한다 => 구조분해 할당.
+      // const [one, two, three, four, five] = arr;
+      // const [one,, three,, five] = arr; 이렇게 변수 3개만 사용 가능
+
+      // 마찬가지로 이렇게 구조분해 할당 가능
+      const { body } = document;
+      const $table = document.createElement("table");
+      const $result = document.createElement("div");
+      const rows = [];
+      let turn = "O";
+      for (let i = 0; i < 3; i++) {
+        const $tr = document.createElement("tr");
+        const cells = [];
+        for (let j = 0; j < 3; j++) {
+          const $td = document.createElement("td");
+          cells.push($td);
+          // 원래라면 이런식으로 클릭이벤트가 발생할 때 해당되는 태그에 콜백함수가 실행되게끔
+          // 설정하는것이 정석적인데, 이를 줄이기 위해 이벤트 버블링 기능 활용 가능
+          // $td.addEventListener("click", (event) => {
+          //   // 칸이 채워져있다.
+          //   if (event.target.textContent) return;
+          //   // 빈칸이다.
+          //   event.target.textContent = turn;
+          //   turn = turn === "O" ? "X" : "O";
+          //   // if (turn === "O") {
+          //   //   turn = "X";
+          //   // } else if (turn === "X") {
+          //   //   turn = "O";
+          //   // }
+          // });
+          $tr.append($td);
+        }
+        rows.push(cells);
+        $table.append($tr);
+      }
+      // 위 반복문 안에 있던 addEventListener의 동작을 똑같이 수행한다.
+      // 그 이유는 HTML에서 자손태그에서 이벤트가 발생하면, 그 상위 부모 태그 및 조상 태그들에
+      // 모두 이벤트가 발생하게 된다.
+      // => 이벤트 버블링
+      // 반대로 부모 태그를 선택했는데 자손 태그에도 모두 이벤트가 발생하는 것을
+      // 이벤트 캡쳐링이라고 한다.
+
+      const callback = (event) => {
+        // 이벤트 버블링 현상을 막기 위한 방법
+        // event.stopPropagation()
+        if (event.target.textContent) {
+          console.log("빈칸이 아닙니다.");
+          return;
+        }
+        console.log("빈칸입니다.");
+        event.target.textContent = turn;
+        // 승부판단
+        const hasWinner = checkWinner(event.target);
+        if (hasWinner) {
+          $result.textContent = `${turn}님이 승리!`;
+          $table.removeEventListener("click", callback);
+          return;
+        }
+        // 무승부 검사
+        // 첫번째 칸이 비어있다면 그냥 다음으로 넘어가면 되는데, 이 로직의 경우
+        // 끝까지 다 돌아야하는 문제 있음(비효율)
+        // let draw = true;
+        // rows.forEach((row) => {
+        //   row.forEach((cell) => {
+        //     if (!cell.textContent) {
+        //       draw = false;
+        //     }
+        //   });
+        // });
+        const draw = rows.flat().every((cell) => cell.textContent);
+        if (draw) {
+          $result.textContent = `무승부`;
+          return;
+        }
+        turn = turn === "X" ? "O" : "X";
+      };
+      const checkWinner = (target) => {
+        // target 태그의 부모 태그의 인덱스 가져오기
+        // tr은 rowIndex제공
+        const rowIndex = target.parentNode.rowIndex;
+        // target 태그의 열 인덱스 가져오기
+        // td는 cellIndex 제공
+        const cellIndex = target.cellIndex;
+
+        // 세 칸 다 채워졌나?
+        let hasWinner = false;
+        // 가로줄 검사
+        if (
+          rows[rowIndex][0].textContent === turn &&
+          rows[rowIndex][1].textContent === turn &&
+          rows[rowIndex][2].textContent === turn
+        ) {
+          hasWinner = true;
+        }
+        // 세로줄 검사
+        if (
+          rows[0][cellIndex].textContent === turn &&
+          rows[1][cellIndex].textContent === turn &&
+          rows[2][cellIndex].textContent === turn
+        ) {
+          hasWinner = true;
+        }
+        // 대각선 검사
+        if (
+          rows[0][0].textContent === turn &&
+          rows[1][1].textContent === turn &&
+          rows[2][2].textContent === turn
+        ) {
+          hasWinner = true;
+        }
+        if (
+          rows[0][2].textContent === turn &&
+          rows[1][1].textContent === turn &&
+          rows[2][0].textContent === turn
+        ) {
+          hasWinner = true;
+        }
+        return hasWinner;
+      };
+      $table.addEventListener("click", callback);
+      body.append($table);
+      body.append($result);
+    </script>
+  </body>
+</html>

@@ -51,6 +51,6 @@
     - 비동기의 이해(setTimeout), 반복문과 배열 메서드 심화 활용, 클로저 문제의 이해
   - 5판 3선승제 가위바위보(rock-scissors-paper-self.html)
     - 비동기의 이해(setInterval, clearInterval), 수치화한 규칙으로 조건문 분기하는 방법, 이벤트가 발생하지 않게끔 동작하게 하는 방법 이해
-  - 반응 속도 체크 게임 구현(response-check-self.html)
+  - 상위 5개의 기록을 보여주는 반응 속도 체크 게임 구현(response-check-self.html)
     - CSS id와 class별 값 부여 방법, querySelector 내부 속성 값 중 classList와 관련 메서드(contains, remove, add, replace)의 이해,
-      setTimeout과 clearTimeout을 활용한 비동기 이해
+      setTimeout과 clearTimeout을 활용한 비동기 이해, 배열 메서드 심화 활용
