@@ -39,6 +39,7 @@
   - 배열 메서드 심화(map, filter, fill, forEach)(배열메서드.js)
   - 가위바위보 구현(rock-scissors-paper.html)
   - 반응 속도 체크 게임 구현(response-check.html)
+  - 배열 메서드 심화 활용 및 응용(every, some, flat, Array.from(), reduce, concat, apply, sort)
 
 - ## 실습
   - 쿵쿵따게임(끝말잇기 + 3글자 제한 + 인원입력 안하면 다음 코드 실행하지 않게) 구현(쿵쿵따게임.html)
@@ -52,5 +53,6 @@
   - 5판 3선승제 가위바위보(rock-scissors-paper-self.html)
     - 비동기의 이해(setInterval, clearInterval), 수치화한 규칙으로 조건문 분기하는 방법, 이벤트가 발생하지 않게끔 동작하게 하는 방법 이해
   - 상위 5개의 기록을 보여주는 반응 속도 체크 게임 구현(response-check-self.html)
-    - CSS id와 class별 값 부여 방법, querySelector 내부 속성 값 중 classList와 관련 메서드(contains, remove, add, replace)의 이해,
-      setTimeout과 clearTimeout을 활용한 비동기 이해, 배열 메서드 심화 활용
+    - CSS id와 class별 값 부여 방법, querySelector 내부 속성 값 중 classList와 관련 메서드(contains, remove, add, replace)의 이해, setTimeout과 clearTimeout을 활용한 비동기 이해, 배열 메서드 심화 활용
+  - 컴퓨터와 즐기는 tic-tac-toe 구현(tic-tac-toe-self(컴퓨터 선택 구현).html)
+    - 배열 메서드 심화 활용(every, some, flat, Array.from(), reduce), 이벤트 버블링과 이벤트 캡쳐링의 이해, 비동기 처리 심화 활용, 구조분해할당 이해, 태그의 여러 속성(parentNode/rowIndex/cellIndex) 활용
