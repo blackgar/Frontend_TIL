@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>틱택토</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+
+      td {
+        border: 1px solid black;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      3*3 배열을 준비한다. 안에 값은 0으로 넣기
+
+      1. 게임 진행
+      플레이어 1부터 시작해서 플레이어 2 이렇게 순서대로 진행
+      플레이어 1은 배열에 O로 채우고 플레이어 2는 X로 채우기
+      채울때 조건은 안의 값이 0이어야 한다.
+      
+      그리고 특정 버튼을 눌렀을 때 해당 좌표 값을 가지고 와야하고 그 좌표 값을 인덱스에 넣어서 안의 값이 0인지 체크해야 한다.
+      안이 비어있지 않으면 이미 선택된 칸이라는 알림을 보내거나 아무 동작도 일어나지 않게끔 처리 해야한다.
+
+      체크한 칸이 5칸을 넘어가는 순간부터 칸을 체크할 때마다 승리했는지 여부를 체크한다.
+      세로 가로 대각선 배열을 탐색하면서 틱택토가 완성되었는지 체크한다.
+      승리인지 무승부인지 체크한 후 승부가 나지 않았으면 다음 턴으로 넘어간다.
+    -->
+    <!-- <table>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table> -->
+    <script>
+      const data = [];
+      const $table = document.createElement("table");
+      const $div = document.createElement("div");
+      let clickCount = 0;
+      let winner;
+      const checkWinner = () => {
+        let result;
+        data.map((f, i) => {
+          let ver = [];
+          let hor = [];
+          let crossL = [];
+          let crossR = [];
+          for (let j = 0; j < data.length; j++) {
+            ver.push(data[i][j]);
+            hor.push(data[j][i]);
+            crossR.push(data[j][2 - j]);
+            crossL.push(data[j][j]);
+          }
+          console.log(ver, hor, crossL, crossR);
+          if (
+            ver.filter((v) => v === "X").length === 3 ||
+            hor.filter((v) => v === "X").length === 3 ||
+            crossR.filter((v) => v === "X").length === 3 ||
+            crossL.filter((v) => v === "X").length === 3
+          ) {
+            result = ["X", "X", "X"];
+          } else if (
+            ver.filter((v) => v === "O").length === 3 ||
+            hor.filter((v) => v === "O").length === 3 ||
+            crossR.filter((v) => v === "O").length === 3 ||
+            crossL.filter((v) => v === "O").length === 3
+          ) {
+            result = ["O", "O", "O"];
+          }
+        });
+        console.log(result);
+        return result;
+      };
+      for (let i = 0; i < 3; i++) {
+        let tmp = [];
+        const $tr = document.createElement("tr");
+        for (let j = 0; j < 3; j++) {
+          tmp.push(0);
+          const $td = document.createElement("td");
+          $td.addEventListener("click", () => {
+            if (data[i][j] || winner) return;
+            clickCount += 1;
+            clickCount % 2 == 1 ? (data[i][j] = "X") : (data[i][j] = "O");
+            $td.textContent = clickCount % 2 == 1 ? "X" : "O";
+            // 클릭된 위치의 가로 세로 대각만 체크하면 된다.
+            // filter을 사용해서
+            if (clickCount > 4) {
+              if (clickCount === 9) {
+                $div.textContent = "무승부입니다.";
+                return;
+              }
+              const result = checkWinner();
+              if (!result) return;
+              if (result.includes("X")) $div.textContent = "플레이어X 승리";
+              else if (result.includes("O"))
+                $div.textContent = "플레이어O 승리!";
+              winner = result;
+            }
+          });
+          $tr.append($td);
+        }
+
+        $table.append($tr);
+        data.push(tmp);
+      }
+
+      console.log(data);
+      document.body.append($table);
+      document.body.append($div);
+    </script>
+  </body>
+</html>
