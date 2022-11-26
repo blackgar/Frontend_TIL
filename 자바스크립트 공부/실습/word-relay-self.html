@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>쿵쿵따게임</div>
+    <div><span id="order">1</span>번째 참가자</div>
+    <div>제시어 : <span id="word"></span></div>
+    <input type="text" />
+    <button class="btn">입력</button>
+    <script>
+      const players = Number(prompt("몇명이서 플레이 하나요?"));
+      if (players > 0) {
+        const $input = document.querySelector("input");
+        const $button = document.querySelector(".btn");
+        const $span = document.querySelector("#word");
+        const $order = document.querySelector("#order");
+        let word;
+        let newWord;
+
+        // 이렇게 위에 조건문 분기에서 처리를 할 수도 있고
+        const onClickButton = () => {
+          if (
+            (!word || word[word.length - 1] === newWord[0]) &&
+            newWord.length === 3
+          ) {
+            word = newWord;
+            $span.textContent = word;
+            const order = Number($order.textContent);
+            if (order + 1 > players) {
+              $order.textContent = 1;
+            } else {
+              $order.textContent = order + 1;
+            }
+          } else {
+            alert("잘못된 단어 입력입니다. 다시 입력해주세요.");
+          }
+          $input.value = "";
+          $input.focus();
+        };
+        // input 단에서 3글자 체크도 가능하다.
+        const onInput = (event) => {
+          if (event.target.value.length > 3) {
+            alert("세 글자 초과했습니다. 다시 입력해주세요.");
+          }
+          newWord = event.target.value;
+        };
+
+        $input.addEventListener("input", onInput);
+        $button.addEventListener("click", onClickButton);
+      } else {
+        alert("참가자가 없습니다. 게임을 종료합니다.");
+        window.close();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,131 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>숫자야구</title>
+  </head>
+  <body>
+    <form id="form">
+      <input type="text" id="input" placeholder="숫자를 입력해주세요." />
+      <button>확인</button>
+    </form>
+    <div id="logs"></div>
+    <div id="life"></div>
+    <script>
+      // 숫자를 선택할 수 있게 구현
+      const number = prompt("정답 숫자를 선택해주세요.");
+      if (number.length === 4 || new Set(number).size !== 4) {
+        const $input = document.querySelector("#input");
+        const $form = document.querySelector("#form");
+        const $log = document.querySelector("#logs");
+        const $life = document.querySelector("#life");
+        let life = 10;
+        let out = 0;
+        const checkInput = (input) => {
+          const includeString = input.filter((v) => isNaN(v));
+          if (
+            includeString.length > 0 ||
+            input.length !== 4 ||
+            new Set(input).size !== 4
+          )
+            return false;
+          return true;
+        };
+
+        const AlertAndAppendLog = (alertMessage, logMessage, lifeMessage) => {
+          alert(alertMessage);
+          logMessage
+            ? $log.append(logMessage, document.createElement("br"))
+            : null;
+          lifeMessage
+            ? ($life.textContent = lifeMessage)
+            : `${life}회 남았습니다.`;
+        };
+
+        const onSubmit = (event) => {
+          event.preventDefault();
+          let inputNumber = Array(...$input.value);
+          // 입력된 숫자 길이, 숫자로만 이루어졌는지, 중복은 없는지 체크.
+          const valid = checkInput(inputNumber);
+          if (!valid) {
+            alert("중복되지 않은 4자리 숫자를 입력해주세요.");
+            $input.value = "";
+            $input.focus();
+            return;
+          }
+          // 새로 숫자가 입력됐을 때 strikes와 balls를 선언해주고 계산
+          strikes = 0;
+          balls = 0;
+          // 입력된 숫자를 forEach(반환값이 필요하지 않기 때문에)로 하나씩 돌면서 동시에 인덱스를 활용해서 입력받은 수의 인덱스와도 같은지 체크해서
+          // 값을 포함하면서 위치도 동일하면 strikes와 balls를 동시에 하나씩 올려주고
+          // 값만 포함하는 경우에는 ballse만 + 1 해준다.
+          inputNumber.forEach((v, i) =>
+            number.includes(v)
+              ? v === number[i]
+                ? ((strikes += 1), (balls += 1))
+                : (balls += 1)
+              : null
+          );
+          // 나온 결과로 strikes가 4라면 모든 숫자를 위치도 동일하게 맞춘 것이므로 승리.
+          if (strikes === 4) {
+            AlertAndAppendLog(
+              "홈런입니다~!!! 승리~~!!!!",
+              `${inputNumber.join("")}: 홈런!!!!!!!`,
+              "승리했습니다!!!"
+            );
+            return;
+          }
+          // 승리하지 못했다면, 기회 하나 차감
+          life -= 1;
+          // 기회를 모두 소진했으면 마찬가지로 패배.
+          if (!life) {
+            alert(
+              `기회가 모두 소진되었습니다. 패배ㅠㅠ. 정답은 ${number}입니다.`
+            );
+            AlertAndAppendLog(
+              `기회가 모두 소진되었습니다. 패배ㅠㅠ. 정답은 ${number}입니다.`,
+              0,
+              `패배! 정답은 ${number}입니다.`
+            );
+            // window.location.reload();
+            return;
+          }
+
+          // 아직 기회가 남아있을 때
+          // 추가 조건으로 아무 숫자도 못맞췄다면 아웃이므로 out + 1.
+          if (balls === 0) {
+            out += 1;
+            AlertAndAppendLog(
+              `${out}아웃입니다.`,
+              `${inputNumber.join("")}: ${out}아웃`
+            );
+
+            // 3아웃이라면 패배.
+            if (out > 2) {
+              AlertAndAppendLog(
+                `3아웃으로 패배하셨습니다. 정답은 ${number}입니다.`,
+                0,
+                `패배! 정답은 ${number}입니다.`
+              );
+              // window.location.reload();
+              return;
+            }
+          } else {
+            // 현재 맞춘 strikes와 balls를 알려준다.
+            AlertAndAppendLog(
+              `${strikes}스트라이크 ${balls}볼 입니다.`,
+              `${inputNumber.join("")}: ${strikes} 스트라이크 ${balls} 볼`
+            );
+          }
+
+          // 남은 기회를 알려준다.
+          alert(`기회는 총 ${life}회 남았습니다.`);
+        };
+        $form.addEventListener("submit", onSubmit);
+        $life.textContent = `${life}회 남았습니다.`;
+      } else {
+        alert("중복되지 않은 4자리 숫자를 입력해주세요.");
+        window.location.reload();
+      }
+    </script>
+  </body>
+</html>
