@@ -15,6 +15,6 @@ function solution(s) {
   return answer;
 }
 
-console.log(solution("banana"));
-console.log(solution("abracadabra"));
-console.log(solution("aaabbaccccabba"));
+console.log(solution("banana")); // 3
+console.log(solution("abracadabra")); // 6
+console.log(solution("aaabbaccccabba")); // 3
