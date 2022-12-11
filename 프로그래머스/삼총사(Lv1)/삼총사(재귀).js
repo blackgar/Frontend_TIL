@@ -2,7 +2,7 @@ function solution(number) {
   var answer = 0;
   const combination = (arr, start) => {
     if (arr.length === 3) {
-      answer += arr.reduce((a, b) => a + b) === 0 ? 1 : 0;
+      answer += arr.reduce((a, b) => a + b) ? 0 : 1;
       return;
     }
     for (let i = start; i < number.length; i++) {
