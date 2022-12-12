@@ -1,0 +1,115 @@
+:root {
+  --gray: #95958a;
+  --darkgray: #1f2937;
+  --green: #7ba517;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: Dotum, "Apple Gothic", Verdana, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: 17px;
+  background-color: black;
+  color: var(--gray);
+  font-size: 11px;
+  margin-top: 2rem;
+}
+
+header {
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  width: 100%;
+  max-width: 800px;
+  font-size: 16px;
+}
+
+header h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+#list-form {
+  display: flex;
+}
+
+input,
+button {
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+#list-input {
+  flex: 1 1 0%;
+  padding: 1rem;
+  margin-right: 1rem;
+  font-size: 1rem;
+  background-color: var(--darkgray);
+  color: white;
+  border-radius: 1rem;
+}
+
+#list-input::placeholder {
+  color: var(--gray);
+}
+
+#submit-button {
+  width: 100px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--green);
+  border: var(--green) solid 1px;
+  border-radius: 1rem;
+}
+
+#submit-button:hover {
+  cursor: pointer;
+  background-color: var(--green);
+  color: white;
+}
+
+main {
+  flex: 1 1 0%;
+  padding: 2rem 1rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+}
+
+.visualization-list h2 {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+
+#lists .list {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background-color: white;
+  color: black;
+  border-radius: 1rem;
+}
+
+#lists .list .content {
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+#lists .list:nth-child(3n + 3) {
+  color: red;
+}
