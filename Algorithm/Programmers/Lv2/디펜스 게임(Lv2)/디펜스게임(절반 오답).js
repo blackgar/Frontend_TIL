@@ -24,10 +24,12 @@ function solution(n, k, enemy) {
   let sortedArr = enemy.slice(0, maxIndex).sort((a, b) => a - b);
   console.log(sortedArr);
   // console.log("디펜스 시작");
-  for (let i = 0; i < enemy.length; i++) {
+  let i = 0;
+  while (true) {
     // console.log(i + 1, "번째 웨이브", n, enemy[i], k, answer);
     if (enemy[i] <= soldier) {
       soldier -= enemy[i];
+      i++;
     } else if (k > 0) {
       if (enemy[i] < sortedArr[sortedArr.length - 1]) {
         soldier += sortedArr.pop() - enemy[i];
