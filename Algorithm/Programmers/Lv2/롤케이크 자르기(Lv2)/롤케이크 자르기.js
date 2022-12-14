@@ -6,8 +6,8 @@ function solution(topping) {
   // 돌면서 원래 Obj에서는 값을 빼는데 이때 값이 0이 되면 그 key에서 하나 뺀다. 그렇게 다른 Obj 배열의 길이와 key값을 비교해서 같으면 answer++
   let olderObj = {},
     youngerObj = {},
+    olderToppings = 0,
     youngerToppings = 0;
-  const olderTopping = [];
   topping.forEach((v) =>
     youngerObj[v] ? youngerObj[v]++ : (youngerToppings++, (youngerObj[v] = 1))
   );
@@ -15,13 +15,13 @@ function solution(topping) {
   for (let i = 0; i < topping.length - 1; i++) {
     if (!olderObj[topping[i]]) {
       olderObj[topping[i]] = 1;
-      olderTopping.push(topping[i]);
+      olderToppings++;
     }
     youngerObj[topping[i]]--;
     youngerObj[topping[i]] === 0 ? youngerToppings-- : null;
     // console.log(olderObj, youngerObj, olderTopping, youngerToppings);
-    if (olderTopping.length === youngerToppings) answer++;
-    if (olderTopping.length > youngerToppings) break;
+    if (olderToppings === youngerToppings) answer++;
+    if (olderToppings > youngerToppings) break;
     // olderObj[topping[i]] ? olderObj[topping[i]]++ : olderTopping.push(topping[i])
   }
   return answer;
