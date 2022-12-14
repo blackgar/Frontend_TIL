@@ -1,16 +1,68 @@
-// 현재 주어진 카드들 중 가장 작은 수의 약수 구하기
-// 이유는 현재 모든 카드들 중에 가장 작은 수가 나누어 떨어지고 그 다음 큰 수들이 나누어 떨어져야 하므로 제일 작은 수의 약수를 구한 다음 그 약수로 주어진 카드를 나누어서 나누어떨어진다면 상대방 카드를 나눠서 나누어떨어지지 않는 약수를 찾는다.
-function makeDivisor(num) {
-  return;
+function checkDivisor(num) {
+  let tmp = [];
+  for (let i = 1; i <= Math.sqrt(num); i++) {
+    if (i * i === num) tmp.push(i);
+    else if (num % i === 0) {
+      tmp.push(i);
+      tmp.push(num / i);
+    }
+  }
+  tmp = tmp.sort((a, b) => b - a);
+  return tmp;
 }
 
-// 내 카드와 상대방 카드를 나누어서 조건이 충족하는지 체크한다.
-function divide(arr, num) {
-  return;
+function checkDivideOwn(arr, num) {
+  let tmp = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % num === 0) {
+      tmp.push(i);
+    } else {
+      break;
+    }
+  }
+  return tmp.length === arr.length;
+}
+
+function checkDivideOther(arr, num) {
+  let tmp = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % num === 0) {
+      tmp.push(i);
+      break;
+    }
+  }
+  return tmp.length === 0;
 }
 
 function solution(arrayA, arrayB) {
-  return;
+  let answer = 0;
+  let numA = 0,
+    numB = 0;
+  // 런타임에러 코드에서와의 차이점은 직접 sort메서드로 정렬한 후 제일 작은 수를 넣어줬다는 점
+  arrayA.sort((a, b) => a - b);
+  arrayB.sort((a, b) => a - b);
+  let arrayADivisor = checkDivisor(arrayA[0]);
+  let arrayBDivisor = checkDivisor(arrayB[0]);
+  let result1, result2;
+
+  for (let i = 0; i < arrayADivisor.length; i++) {
+    result1 = checkDivideOwn(arrayA, arrayADivisor[i]);
+    result2 = checkDivideOther(arrayB, arrayADivisor[i]);
+    if (result1 && result2) {
+      numA = arrayADivisor[i];
+      break;
+    }
+  }
+  for (let i = 0; i < arrayBDivisor.length; i++) {
+    result1 = checkDivideOwn(arrayB, arrayBDivisor[i]);
+    result2 = checkDivideOther(arrayA, arrayBDivisor[i]);
+    if (result1 && result2) {
+      numB = arrayBDivisor[i];
+      break;
+    }
+  }
+  answer = Math.max(numA, numB);
+  return answer;
 }
 
 console.log(solution([10, 17], [5, 20])); // 0

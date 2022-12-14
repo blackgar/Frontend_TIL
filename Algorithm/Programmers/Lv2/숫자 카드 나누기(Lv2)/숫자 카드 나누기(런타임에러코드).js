@@ -42,6 +42,7 @@ function solution(arrayA, arrayB) {
     numB = 0;
   // 배열에 들어있는 수들 중에 제일 작은 값부터 약수를 찾아서 그 약수로 해당 배열을 나눠보고
   // 모두 나누어지면 다른 배열이 나누어지지 않는지 확인한다.
+  // Math.min 메서드 안의 인자가 너무 큰 배열이 들어갈 경우 메모리 초과로 런타임 에러가 발생할 수 있다.
   let arrayADivisor = checkDivisor(Math.min(...arrayA));
   let arrayBDivisor = checkDivisor(Math.min(...arrayB));
   let result1, result2;
