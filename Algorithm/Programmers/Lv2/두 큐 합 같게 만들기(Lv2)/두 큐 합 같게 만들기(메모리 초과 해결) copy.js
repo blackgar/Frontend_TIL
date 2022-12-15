@@ -29,6 +29,7 @@ function solution(queue1, queue2) {
       queue1.push(queue2[right]);
       right++;
     }
+    console.log(queue1, queue2);
     answer++;
     // console.log(hap1, hap2, queue1, queue2);
   }
