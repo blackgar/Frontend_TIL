@@ -7,6 +7,7 @@ function solution(fees, records) {
   const baseCharge = fees[1];
   const perTime = fees[2];
   const perTimeFee = fees[3];
+  // 입차한 기록을 바탕으로 출차 시 주차한 시간을 계산
   for (let i = 0; i < records.length; i++) {
     const tmp = records[i].split(" ");
     const time = tmp[0].split(":");
@@ -22,12 +23,14 @@ function solution(fees, records) {
       delete entranceObj[tmp[1]];
     }
   }
+  // 만약 입차한 기록만 남아있다면 23:59분 출차로 계산해서 주차시간 등록
   for (const key in entranceObj) {
     parkingTimeObj[key] =
       (parkingTimeObj[key] +=
         (23 - entranceObj[key][0]) * 60 + (59 - entranceObj[key][1])) ||
       (23 - entranceObj[key][0]) * 60 + (59 - entranceObj[key][1]);
   }
+  // 주차 시간에 맞게 주차 요금 계산
   for (const key in parkingTimeObj) {
     parkingFeeObj[key] = 0;
     if (parkingTimeObj[key] > minTime)
@@ -35,6 +38,7 @@ function solution(fees, records) {
         Math.ceil((parkingTimeObj[key] - minTime) / perTime) * perTimeFee;
     parkingFeeObj[key] += baseCharge;
   }
+  // 차 번호가 빠른순으로 정답을 담아야 하므로 key 정렬 후 주차요금 정리
   const keys = Object.keys(parkingFeeObj).sort((a, b) => a - b);
   keys.forEach((v) => answer.push(parkingFeeObj[v]));
   return answer;
