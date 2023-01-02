@@ -1,5 +1,5 @@
 function solution(input) {
-  let answer;
+  let answer = "";
   return answer;
 }
 
