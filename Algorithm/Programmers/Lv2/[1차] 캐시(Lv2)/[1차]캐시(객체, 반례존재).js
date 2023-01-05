@@ -12,7 +12,7 @@ function solution(cacheSize, cities) {
   // jeju pangyo seoul newyork la jeju pangyo seoul newyork input을 예시로 하면
   // jeju : 1 => jeju : 2, pangyo : 1 => jeju : 3, pangyo : 2, seoul : 1 => jeju : 4이므로 delete, pangyo : 3, seoul : 2, newyork : 1 => 다음은 pangyo : 4이므로 delete seoul : 3, newyork : 2, la : 1 이런식으로 진행
   console.log(cacheSize, cities);
-  for (const city of cities) {
+  for (let city of cities) {
     city = city.toLowerCase();
     console.log(cacheObj[city]);
     // if (cacheObj[city] > cacheSize) delete cacheObj[city];
