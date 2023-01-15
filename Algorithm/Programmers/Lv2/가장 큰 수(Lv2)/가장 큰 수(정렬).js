@@ -1,16 +1,24 @@
 function sortArr(arr) {
-  console.log(arr);
+  //     arr.sort(
+  //   (a, b) =>
+  //     (b[2] === undefined ? b[1] !== undefined ? b[1] : b[0] : b[2]) - (a[2] === undefined ? a[1] !== undefined ? b[1] : b[0] : a[2])
+  // );
+  //     arr.sort(
+  //   (a, b) =>
+  //     (b[1] === undefined ? b[0] : b[1]) - (a[1] === undefined ? a[0] : a[1])
+  // );
+  // arr.sort((a, b) => b[0] - a[0]);
   arr.sort(
     (a, b) =>
-      (b[2] === undefined ? b[b.length - 1] : b[2]) -
-      (a[2] === undefined ? a[a.length - 1] : a[2])
+      (b[2] !== undefined ? b[2] : b[1] !== undefined ? b[1] : b[0]) -
+      (a[2] !== undefined ? a[2] : a[1] !== undefined ? a[1] : a[0])
   );
   arr.sort(
     (a, b) =>
-      (b[1] === undefined ? b[b.length - 1] : b[1]) -
-      (a[1] === undefined ? a[a.length - 1] : a[1])
+      (b[1] !== undefined ? b[1] : b[0]) - (a[1] !== undefined ? a[1] : a[0])
   );
-  return arr.join("");
+  arr.sort((a, b) => b[0] - a[0]);
+  return arr.join("") === "0".repeat(arr.length) ? "0" : arr.join("");
 }
 
 function solution(numbers) {
@@ -34,7 +42,7 @@ function solution(numbers) {
 
 console.log(solution([6, 10, 2]));
 console.log(solution([3, 30, 34, 5, 9]));
-console.log(solution([3, 30, 34, 349]));
+console.log(solution([3, 30, 34, 349, 348, 343]));
 console.log(
   solution([
     1, 2, 3, 4, 5, 6, 7, 8, 9, 101, 95, 951, 961, 89, 809, 831, 14, 552, 680,
