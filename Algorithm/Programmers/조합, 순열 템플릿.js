@@ -16,3 +16,15 @@ const getPermutations = function (arr, selectNumber) {
 
   return results; // 결과 담긴 results return
 };
+
+function pwr(arr, pick, list, result) {
+  if (arr.length === pick) {
+    result.push(arr.join(""));
+    return;
+  }
+  for (let item of list) {
+    arr.push(item);
+    pwr(arr, pick, list, result);
+    arr.pop();
+  }
+}
