@@ -20,13 +20,13 @@ function solution(msg) {
       lastWord = tmp;
       // 만약 없는 단어라면 앞에 있던 단어들까지 색인 번호를 추가하고
       // 새로운 단어를 찾으러 떠나본다.
-      if (i === msg.length - 1) answer.push(msgObj[tmp]);
     } else {
       answer.push(msgObj[lastWord]);
       msgObj[tmp] = Object.values(msgObj).sort((a, b) => b - a)[0] + 1;
       tmp = msg[i];
       lastWord = msg[i];
     }
+    if (i === msg.length - 1) answer.push(msgObj[tmp]);
     console.log(msg[i], tmp, lastWord, answer);
   }
 
